@@ -22,10 +22,10 @@ spec:
   interval: 30m
   chart:
     spec:
-      chart: kube-prometheus-stack
+      chart: prometheus-community/kube-prometheus-stack
       version: "*"
       sourceRef:
         kind: HelmRepository
-        name: ingress-nginx
+        name: kube-prometheus-stack
         namespace: monitoring
       interval: 12h
