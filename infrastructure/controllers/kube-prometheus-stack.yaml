@@ -8,7 +8,6 @@ apiVersion: source.toolkit.fluxcd.io/v1beta2
 kind: HelmRepository
 metadata:
   name: prometheus-community
-  namespace: monitoring
 spec:
   interval: 12h
   type: oci
@@ -18,7 +17,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
-  namespace: monitoring
 spec:
   interval: 1h
   chart:
@@ -29,3 +27,10 @@ spec:
         kind: HelmRepository
         name: prometheus-community
       interval: 1h
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    alertmanager:
+      enabled: false
