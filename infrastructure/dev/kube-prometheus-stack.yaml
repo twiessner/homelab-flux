@@ -3,6 +3,6 @@ kind: HelmRelease
 metadata:
   name: kube-prometheus-stack
 spec:
-  chart:
-    spec:
-      version: "52.0.1"
+  values:
+    alertmanager:
+      enabled: false

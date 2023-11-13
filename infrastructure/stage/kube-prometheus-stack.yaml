@@ -5,4 +5,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: "54.0.0"
+      version: 52.0.0
+  values:
+    alertmanager:
+      enabled: true
