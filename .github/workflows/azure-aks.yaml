@@ -1,0 +1,15 @@
+
+name: Manage Azure AKS infrastructure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        run: |
+          echo "Hello terraform - todo here"
