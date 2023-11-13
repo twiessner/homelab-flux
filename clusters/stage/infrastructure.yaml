@@ -11,6 +11,6 @@ spec:
   sourceRef:
     kind: GitRepository
     name: flux-system
-  path: ./infrastructure/stage/controllers
+  path: ./infrastructure/controllers/stage
   prune: true
   wait: true
