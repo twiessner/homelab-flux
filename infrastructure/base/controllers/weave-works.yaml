@@ -10,6 +10,25 @@ spec:
   url: oci://ghcr.io/weaveworks/charts
 
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: flux-system
+spec:
+  rules:
+    - host: ingress.local
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: ingress
+                port:
+                  number: 80
+
+---
 # See https://github.com/weaveworks/weave-gitops/tree/main/charts/gitops-server
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
