@@ -1,0 +1,36 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: weave-gitops
+spec:
+  type: oci
+  interval: 60m0s
+  url: oci://ghcr.io/weaveworks/charts
+
+---
+# See https://github.com/weaveworks/weave-gitops/tree/main/charts/gitops-server
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: weave-gitops
+spec:
+  interval: 60m
+  chart:
+    spec:
+      chart: weave-gitops
+      version: "*"
+      sourceRef:
+        kind: HelmRepository
+        name: weave-gitops
+      interval: 12h
+  # see: https://github.com/weaveworks/weave-gitops/blob/main/charts/gitops-server/values.yaml
+  values:
+    adminUser:
+      create: true
+      username: admin
+      # execute command: gitops get bcrypt-hash ... and password and copy result
+      passwordHash: "$2a$10$9X8GRtOgo1o8qfRYtI9qlOKk4KvTDhFKlpMdNLuLEH8rB601UCUz." # admin
+    ingress:
+      enabled: true
+      className: nginx
